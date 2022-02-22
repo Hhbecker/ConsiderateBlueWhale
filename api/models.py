@@ -5,7 +5,6 @@ from django.forms import IntegerField
 
 class AudioFile(models.Model):
     title = models.CharField(max_length=200)
-    length = models.TimeField()
     bpm = models.IntegerField()
 
     def __str__(self):
