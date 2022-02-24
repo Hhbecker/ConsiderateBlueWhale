@@ -3,7 +3,7 @@
 # operations are defined. 
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,6 +12,7 @@ from api.models import AudioFile
 from .serializers import AudioFileSerializer
 
 from .models import AudioFile
+from .forms import AudioFileForm
 
 # Create your views here.
 
@@ -40,7 +41,7 @@ def fileList(request):
     # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
     serializer = AudioFileSerializer(files, many = True)
     # return the JSON data of the AudioFile instances
-    return(Response(serializer.data))
+    return render(request, 'api/fileList.html', {'files' : files})
 
 # view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
 # input: GET request, id of AudioFile to be retrieved
@@ -54,17 +55,18 @@ def fileDetail(request, pk):
     return(Response(serializer.data))
 
 # view fileCreate: add an AudioFile instance to the database
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def fileCreate(request):
-    # pass the data in the request into the serializer function
-    serializer = AudioFileSerializer(data=request.data)
-    # if data satisfies model requirements save it to the database
-    if serializer.is_valid():
-        serializer.save()
-        return(Response('Audio file added to database.'))
+    if request.method == 'POST':
+        form = AudioFileForm(request.POST, request.FILES)
+        if form.is_valid:
+            form.save()
+            return redirect('fileCreate')
+    else:
+        form = AudioFileForm()
+    return render(request, 'api/fileCreate.html', {'form':form})
 
-
-@api_view(['POST'])
+@api_view(['PUT'])
 # define function based view named fileUpdate which takes in an (http?) 
 # request and a primary key identifer and returns a json response
 def fileUpdate(request, pk):

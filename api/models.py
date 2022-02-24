@@ -6,8 +6,8 @@ from django.forms import IntegerField
 # model AudioFile: contains fields for a title (char) and bpm (int)
 class AudioFile(models.Model):
     title = models.CharField(max_length=200)
-    file = models.FileField()
     bpm = models.IntegerField()
+    file = models.FileField(upload_to='audiofiles/', max_length=100, default='SOME STRING')
 
     # the toString method -> return the contents of the title field
     def __str__(self):

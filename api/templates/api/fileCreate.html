@@ -1,0 +1,16 @@
+
+{% load crispy_forms_tags %}
+<html>
+
+    <body>
+
+        <h1>  Audio File Upload   </h1>
+        <form method="post" enctype="multipart/form-data">
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Upload File</button>
+        </form>
+
+    </body>
+
+
+</html>
