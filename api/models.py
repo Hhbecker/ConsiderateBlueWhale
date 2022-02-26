@@ -7,6 +7,7 @@ from django.forms import IntegerField
 class AudioFile(models.Model):
     title = models.CharField(max_length=200)
     bpm = models.IntegerField()
+    # for audio files, specifies folder in server where uploaded files should be stored
     file = models.FileField(upload_to='audiofiles/', max_length=100, default='SOME STRING')
 
     # the toString method -> return the contents of the title field

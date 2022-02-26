@@ -14,8 +14,6 @@ from .serializers import AudioFileSerializer
 from .models import AudioFile
 from .forms import AudioFileForm
 
-# Create your views here.
-
 # this is a decorator which allows you to specify which HTTP methods this view is allowed to respond to
 @api_view(['GET'])
 # view apiOverview: lists each url path the api can service - only responds to GET requests (otherwise 405 method not allowed error returned)
@@ -40,7 +38,9 @@ def fileList(request):
     files = AudioFile.objects.all()
     # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
     serializer = AudioFileSerializer(files, many = True)
-    # return the JSON data of the AudioFile instances
+    # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
+    # WHY RETURN REQUEST?
+    # 
     return render(request, 'api/fileList.html', {'files' : files})
 
 # view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
@@ -60,6 +60,14 @@ def fileCreate(request):
     if request.method == 'POST':
         form = AudioFileForm(request.POST, request.FILES)
         if form.is_valid:
+
+            ########### CALCULATE BPM HERE
+            # import librosa 
+            # verify file format (maybe do this in model?)
+            # load file from ../audiofiles as a librosa object
+            # use librosa methods to extract bpm
+            # save bpm into bpm field of AudioFile instance
+
             form.save()
             return redirect('fileCreate')
     else:
