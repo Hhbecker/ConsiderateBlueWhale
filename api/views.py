@@ -68,8 +68,17 @@ def fileCreate(request):
             # use librosa methods to extract bpm
             # save bpm into bpm field of AudioFile instance
 
-            form.save()
-            return redirect('fileCreate')
+            instance = form.save(commit=False)
+            instance.bpm = 20
+            #This save() method accepts an optional commit keyword argument, which accepts 
+            # either True or False. If you call save() with commit=False, then it will return 
+            # an object that hasn’t yet been saved to the database. In this case, it’s up to 
+            # you to call save() on the resulting model instance. This is useful if you want 
+            # to do custom processing on the object before saving it, or if you want to use 
+            # one of the specialized model saving options. commit is True by default.   
+
+            instance.save()
+            return redirect('create')
     else:
         form = AudioFileForm()
     return render(request, 'api/fileCreate.html', {'form':form})
