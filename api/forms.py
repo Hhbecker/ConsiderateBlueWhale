@@ -14,4 +14,4 @@ class AudioFileForm(ModelForm):
     class Meta:
         model = AudioFile
         # change __all__ to all expect bpm b/c this is calculated within view
-        fields = ['title', 'file']
+        fields = ['title', 'artist', 'file']
