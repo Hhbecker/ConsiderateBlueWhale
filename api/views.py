@@ -13,6 +13,24 @@ from .serializers import AudioFileSerializer
 
 from .models import AudioFile
 from .forms import AudioFileForm
+import librosa as lib
+import pathlib
+
+# current working directory
+print(pathlib.Path().absolute())
+
+def getBpm(filePath):
+    # confirm input is valid audio file with positive duration
+
+    y,sr = lib.load(filePath)
+
+    if lib.util.valid_audio(y):
+        #length = lib.get_duration(audioFile) 
+        onset_env = lib.onset.onset_strength(y=y, sr=sr)
+        tempo = lib.beat.tempo(onset_envelope=onset_env, sr=sr)
+        return tempo[0]
+    else:
+        return -1
 
 # this is a decorator which allows you to specify which HTTP methods this view is allowed to respond to
 @api_view(['GET'])
@@ -62,14 +80,12 @@ def fileCreate(request):
         if form.is_valid:
 
             ########### CALCULATE BPM HERE
-            # import librosa 
-            # verify file format (maybe do this in model?)
-            # load file from ../audiofiles as a librosa object
-            # use librosa methods to extract bpm
-            # save bpm into bpm field of AudioFile instance
 
-            instance = form.save(commit=False)
-            instance.bpm = 20
+            instance = form.save()
+            bpm = getBpm(instance.file.name) 
+
+            instance.bpm = bpm
+
             #This save() method accepts an optional commit keyword argument, which accepts 
             # either True or False. If you call save() with commit=False, then it will return 
             # an object that hasn’t yet been saved to the database. In this case, it’s up to 
