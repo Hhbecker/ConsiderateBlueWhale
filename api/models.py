@@ -6,7 +6,7 @@ from django.forms import IntegerField
 # model AudioFile: contains fields for a title (char) and bpm (int)
 class AudioFile(models.Model):
     title = models.CharField(max_length=200)
-    bpm = models.IntegerField()
+    bpm = models.IntegerField(null=True)
     # for audio files, specifies folder in server where uploaded files should be stored
     file = models.FileField(upload_to='audiofiles/', max_length=100, default='SOME STRING')
 
