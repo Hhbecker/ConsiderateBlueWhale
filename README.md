@@ -13,15 +13,14 @@ I used function based views
 I used the
 
 ## To Do
-* develop bpm function in separate file then define it in views.py and call it within create view
+* get javascript up and running to get fetch calls to make delete request 
+1. figure out delete
+2. figure out update (call bpm function from within update too)
 
-* call bpm function from within update too
+
 * change download column from list page to update and add a delete button
-
 * possibly add music player to list page 
-
-* look up where to specify specific file formats in the html file upload or in the django model
-* clear existing records in database to change model so that every entry must have a valid file
+* figure out where to block improper file formats
 
 * watch spotify clone video 
 * watch javascript audio player video 

@@ -23,6 +23,6 @@ urlpatterns = [
     #
     path('update/<str:pk>/', views.fileUpdate, name="update"),
     #
-    path('delete/<str:pk>/', views.fileDelete, name="delete"),
+    path('list/delete/<str:pk>/', views.fileDelete, name="delete"),
 
 ]

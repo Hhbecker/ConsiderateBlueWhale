@@ -79,19 +79,10 @@ def fileCreate(request):
         form = AudioFileForm(request.POST, request.FILES)
         if form.is_valid:
 
-            ########### CALCULATE BPM HERE
-
             instance = form.save()
             bpm = getBpm(instance.file.name) 
 
             instance.bpm = bpm
-
-            #This save() method accepts an optional commit keyword argument, which accepts 
-            # either True or False. If you call save() with commit=False, then it will return 
-            # an object that hasn’t yet been saved to the database. In this case, it’s up to 
-            # you to call save() on the resulting model instance. This is useful if you want 
-            # to do custom processing on the object before saving it, or if you want to use 
-            # one of the specialized model saving options. commit is True by default.   
 
             instance.save()
             return redirect('create')
@@ -107,7 +98,7 @@ def fileUpdate(request, pk):
     # equal to the pk var passed into the view function
     file = AudioFile.objects.get(id=pk)
     serializer = AudioFileSerializer(instance=file, data=request.data)
-    # if the POST data is valid replace (I think replace) the current database instance with the new data
+    # if the PUT data is valid and different than the current data update the current data
     if serializer.is_valid():
         serializer.save()
     return(Response('Audio file updated.'))
@@ -118,5 +109,11 @@ def fileUpdate(request, pk):
 def fileDelete(request, pk):
     file = AudioFile.objects.get(id=pk)
     file.delete()
-    return(Response('Audio file deleted.'))
+    files = AudioFile.objects.all()
+    # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
+    serializer = AudioFileSerializer(files, many = True)
+    # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
+    # WHY RETURN REQUEST?
+    # 
+    return render(request, 'api/fileList.html', {'files' : files})
 

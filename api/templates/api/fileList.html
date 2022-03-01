@@ -19,9 +19,40 @@
                         <td> {{ file.title }}</td>
                         <td> {{ file.bpm }}</td>
                         <td> 
-                            <a href="{{ file.file.url }}" class="btn btn-primary btn-sm">
-                                Download PDF
-                            </a>
+                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
+
+                            <form method="delete" action="update/{{ file.id }}" class="inline">
+                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                                  Play
+                                </button>
+                              </form>
+
+
+                        </td>
+                        <td> 
+                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
+
+                            <form method="delete" action="update/{{ file.id }}" class="inline">
+                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                                  Update
+                                </button>
+                              </form>
+
+
+                        </td>
+                        <td> 
+                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
+
+                            <form method="delete" action="delete/{{ file.id }}" class="inline">
+                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                                  Delete
+                                </button>
+                              </form>
+
+
                         </td>
                     </tr>
                 {% endfor %}
