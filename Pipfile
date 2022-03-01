@@ -9,6 +9,7 @@ django-debug-toolbar = "*"
 djangorestframework = "*"
 librosa = "*"
 django-crispy-forms = "*"
+ffmpeg = "*"
 
 [dev-packages]
 
