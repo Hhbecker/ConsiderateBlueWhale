@@ -21,7 +21,7 @@ urlpatterns = [
     # call the fileCreate view when the 'api/audiofiles-create' url is requested
     path('create/', views.fileCreate, name="create"),
     #
-    path('update/<str:pk>/', views.fileUpdate, name="update"),
+    path('list/update/<str:pk>/', views.fileUpdate, name="update"),
     #
     path('list/delete/<str:pk>/', views.fileDelete, name="delete"),
 

@@ -2,6 +2,7 @@
 # (reads and writes), but the ViewSet is where the available 
 # operations are defined. 
 
+import re
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
@@ -57,8 +58,7 @@ def fileList(request):
     # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
     serializer = AudioFileSerializer(files, many = True)
     # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
-    # WHY RETURN REQUEST?
-    # 
+    # I would ideally use the serialized version of the AudioFile objects but I can't get it to work.
     return render(request, 'api/fileList.html', {'files' : files})
 
 # view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
@@ -90,18 +90,36 @@ def fileCreate(request):
         form = AudioFileForm()
     return render(request, 'api/fileCreate.html', {'form':form})
 
-@api_view(['PUT'])
+@api_view(['GET','POST'])
 # define function based view named fileUpdate which takes in an (http?) 
 # request and a primary key identifer and returns a json response
 def fileUpdate(request, pk):
-    # from AudioFile model (which we imported) get the object with the id 
-    # equal to the pk var passed into the view function
-    file = AudioFile.objects.get(id=pk)
-    serializer = AudioFileSerializer(instance=file, data=request.data)
-    # if the PUT data is valid and different than the current data update the current data
-    if serializer.is_valid():
-        serializer.save()
-    return(Response('Audio file updated.'))
+    if request.method == 'POST':
+        # from AudioFile model (which we imported) get the object with the id 
+        # can also do this in serializer 'serializer = AudioFileSerializer(instance=file, data=request.data)'
+        fileObj = AudioFile.objects.get(id=pk)
+
+        print("\n\n\n File path before update: ", fileObj.file.name, "\n Current BPM: ", fileObj.bpm, "\n\n\n")
+
+        form = AudioFileForm(request.POST, request.FILES, instance=fileObj)
+        if form.is_valid():
+            # create an instance of the database object just saved
+            instance = form.save()
+            bpm = getBpm(instance.file.name) 
+            instance.bpm = bpm
+            instance.save()
+            print("\n\n\n File path after update: ", instance.file.name, "\n New BPM: ", instance.bpm, "\n\n\n")
+
+            files = AudioFile.objects.all()
+            # need to change url by making get call to fileList instead of just displaying file list html
+            return render(request, 'api/fileList.html', {'files' : files})
+
+    else: 
+        print("\n\n\nMade it here boiiiii\n\n\n")
+        file = AudioFile.objects.get(id=pk)
+        form = AudioFileForm()
+        return render(request, 'api/fileUpdate.html', {'form':form, 'file':file})
+        
 
 # view fileDelete: deletes AudioFile instance from database
 # input: DELETE request, id of AudioFile to be deleted
@@ -113,7 +131,6 @@ def fileDelete(request, pk):
     # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
     serializer = AudioFileSerializer(files, many = True)
     # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
-    # WHY RETURN REQUEST?
-    # 
+    # I would ideally use the serialized AudioFile objects but I can't get it to work
     return render(request, 'api/fileList.html', {'files' : files})
 

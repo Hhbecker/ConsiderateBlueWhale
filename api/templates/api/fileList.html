@@ -1,7 +1,27 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        table, th, td {
+        border: 1px solid black;}
+    </style>
+
+    <!-- Another strategy for embedding a button that performs a GET request on a different page
+    <a href="update/{{ file.id }}" method="get" class="btn btn-primary btn-sm">Update</a> -->
+
 
     <body>
+    
+        <script>
+            function deleteFile(id) {
+                fetch('/api/list/delete/' + id, {method: 'DELETE'});
+                fetch('/api/list/', {method: 'GET'});
+            }
+
+            function goToUpdateFile(id) {
+                console.log("Made it here boi")
+                fetch('/api/list/update/' + id, {method: 'GET'});
+            }
+        </script>
 
         <h1>  Audio File List   </h1>
 
@@ -9,50 +29,24 @@
             <thead> 
                 <tr>
                     <th>Title</th>
+                    <th>Title</th>
                     <th>Bpm</th>
-                    <th>Download</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 {% for file in files %}
                     <tr>
                         <td> {{ file.title }}</td>
+                        <td> {{ file.artist }}</td>
                         <td> {{ file.bpm }}</td>
                         <td> 
-                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
-
-                            <form method="delete" action="update/{{ file.id }}" class="inline">
-                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                  Play
-                                </button>
-                              </form>
-
-
-                        </td>
-                        <td> 
-                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
-
-                            <form method="delete" action="update/{{ file.id }}" class="inline">
-                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                  Update
-                                </button>
-                              </form>
-
-
-                        </td>
-                        <td> 
-                            <!-- <a href="delete/{{ file.id }}" method="delete" class="btn btn-primary btn-sm">Delete</a> -->
-
-                            <form method="delete" action="delete/{{ file.id }}" class="inline">
-                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                  Delete
-                                </button>
-                              </form>
-
-
+                            <!--<button onclick=location.href="{% url 'update' file.id %}">Update</button> -->
+                            <a href="{% url 'update' file.id %}" class="btn btn-primary" >Update</a>
+                      </td>
+                        <td>
+                            <button type="button" onclick="deleteFile('{{ file.id }}')">Delete</button>
                         </td>
                     </tr>
                 {% endfor %}
