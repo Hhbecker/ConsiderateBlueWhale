@@ -7,7 +7,7 @@ This project marks my introduction to python backend development in general and 
 Django is a python based web framework that can be used for many different kinds of web applications. Django (without any additional libraries) can be used to create REST compliant APIs. Django REST Framework is a popular library you install on top of Django that makes creating APIs that comply with RESTful rules much easier.
 
 
-<img src="/images/djangoFlow.png">
+<img src="/images/djangoFlow.jpg">
 
 This drawing shows the general flow of django requests and responses. 
 
@@ -23,6 +23,7 @@ I used function based views
 I used the
 
 ## To Do
+* make a javascript file instead of using inline script tags
 * can't get delete page to refresh automatically
 * can't get update form to change url back to just /api/list/ after you submit it
 * can't switch out link to update to a button
