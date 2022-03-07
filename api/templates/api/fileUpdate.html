@@ -1,0 +1,25 @@
+
+{% load crispy_forms_tags %}
+<html>
+
+    <body>
+
+        <h1>  Audio File Update for: {{file.title}}  </h1>
+
+        <form action="{% url 'update' file.id %}" method="post" enctype="multipart/form-data">
+            {{ form|crispy }}
+            <button type="submit">Update File</button>
+        </form>
+
+        <p>
+            
+            <a href="{% url 'list' %}"><button>List Files</button></a>
+        </p>
+        <p>
+            <a href="{% url 'create' %}"><button>Upload New File</button></a>
+        </p>
+
+    </body>
+
+
+</html>

@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        table, th, td {
-        border: 1px solid black;}
-    </style>
-
     <!-- Another strategy for embedding a button that performs a GET request on a different page
     <a href="update/{{ file.id }}" method="get" class="btn btn-primary btn-sm">Update</a> -->
+
+    <head>        
+
+        <!-- first load django static tag. -->
+        {% load static %}
+<!--    
+        <script src="function.js" type = "text/javascript"></script>
+        <link href="StyleSheet.css" rel="stylesheet">
+-->
+        <script src="{% static 'api/functions.js' %}"></script>
+    </head>
 
 
     <body>
     
-        <script>
-            function deleteFile(id) {
-                fetch('/api/list/delete/' + id, {method: 'DELETE'});
-                fetch('/api/list/', {method: 'GET'});
-            }
-
-            function goToUpdateFile(id) {
-                console.log("Made it here boi")
-                fetch('/api/list/update/' + id, {method: 'GET'});
-            }
-        </script>
-
         <h1>  Audio File List   </h1>
 
-        <table class="table">
+        <table>
             <thead> 
                 <tr>
                     <th>Title</th>
@@ -43,10 +37,10 @@
                         <td> {{ file.bpm }}</td>
                         <td> 
                             <!--<button onclick=location.href="{% url 'update' file.id %}">Update</button> -->
-                            <a href="{% url 'update' file.id %}" class="btn btn-primary" >Update</a>
-                      </td>
+                            <a href="{% url 'update' file.id %}"><button>Update</button></a>
+                        </td>
                         <td>
-                            <button type="button" onclick="deleteFile('{{ file.id }}')">Delete</button>
+                            <button onclick="deleteFile('{{ file.id }}')">Delete</button>
                         </td>
                     </tr>
                 {% endfor %}
@@ -54,7 +48,7 @@
         </table>
 
         <p>
-            <a href="{% url 'create' %}" class="btn btn-primary">Upload Files Here</a>
+            <a href="{% url 'create' %}"><button>Upload New File</button></a>
         </p>
 
     </body>

@@ -112,7 +112,7 @@ def fileUpdate(request, pk):
 
             files = AudioFile.objects.all()
             # need to change url by making get call to fileList instead of just displaying file list html
-            return render(request, 'api/fileList.html', {'files' : files})
+            return redirect(fileList)
 
     else: 
         print("\n\n\nMade it here boiiiii\n\n\n")
