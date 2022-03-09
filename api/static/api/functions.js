@@ -12,9 +12,19 @@ function goToUpdateFile(id) {
     location.href = '/api/list/update/' + id, {method: 'GET'};
 }
 
+var isPlaying = false;
 function playSong(url){
+    const music = new Audio(url);
     console.log("Inside playSong function");
     console.log(url);
-    const music = new Audio(url);
-    music.play();
+
+    if(isPlaying==false){
+        isPlaying==true;
+        music.play();
+    }
+    else{
+        isPlaying==false;
+        music.pause();
+    }
+    
 }

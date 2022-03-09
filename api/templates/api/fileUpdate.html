@@ -1,10 +1,8 @@
-
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-<html>
 
-    <body>
-
-        <h1>  Audio File Update for: {{file.title}}  </h1>
+{% block content %}
+        <h2>  Song Update for: {{file.title}}  </h2>
 
         <form action="{% url 'update' file.id %}" method="post" enctype="multipart/form-data">
             {{ form|crispy }}
@@ -13,13 +11,10 @@
 
         <p>
             
-            <a href="{% url 'list' %}"><button>List Files</button></a>
+            <a href="{% url 'list' %}"><button>Library</button></a>
         </p>
         <p>
-            <a href="{% url 'create' %}"><button>Upload New File</button></a>
+            <a href="{% url 'create' %}"><button>Upload New Song</button></a>
         </p>
 
-    </body>
-
-
-</html>
+{% endblock %}

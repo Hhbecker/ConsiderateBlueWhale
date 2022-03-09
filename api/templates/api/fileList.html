@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 
-<h1>  Audio File List   </h1>
 
-        <table class="center">
+<h2>  Library   </h2>
+
+        <table>
             <thead> 
                 <tr>
                     <th>Title</th>
-                    <th>Title</th>
+                    <th>Artist</th>
                     <th>Bpm</th>
-                    <th>DB ID</th>
-                    <th>Play</th>
+                    <th></th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -22,14 +23,17 @@
                         <td> {{ file.title }}</td>
                         <td> {{ file.artist }}</td>
                         <td> {{ file.bpm }}</td>
-                        <td> {{ file.id }}</td>
-                        <td><button onclick="playSong('{{ file.file.name }}')">Play</button></td>
+                        <!-- <td><button onclick="playSong('{{ file.file.url }}')" id="playButton">Play</button></td> -->
+                        <td>
+                            <audio id="audioElement" controls src="{{ file.file.url }}"></audio>
+                        </td>
                         <td> 
-                            <button onclick="goToUpdateFile('{{ file.id }}')">Update</button>
+                            <button onclick="goToUpdateFile('{{ file.id }}')"><img src="{% static '/api/images/pencil.png' %}" style="width:35px;height:35px;"/></button>
                             <!--<a href="{% url 'update' file.id %}"><button>Update</button></a>-->
                         </td>
+
                         <td>
-                            <a href="{% url 'list' %}"><button onclick="deleteFile('{{ file.id }}')">Delete</button></a>
+                            <a href="{% url 'list' %}"><button onclick="deleteFile('{{ file.id }}')"><img src="{% static '/api/images/x.png' %}" style="width:35px;height:35px;"/></button></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -37,7 +41,7 @@
         </table>
 
         <p>
-            <a href="{% url 'create' %}"><button>Upload New File</button></a>
+            <a href="{% url 'create' %}"><button>Upload Song</button></a>
         </p>
 
 {% endblock %}
