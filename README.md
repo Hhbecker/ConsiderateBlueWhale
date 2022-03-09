@@ -11,7 +11,7 @@ This project marks my introduction to python backend development in general and 
 Django is a python based web framework that can be used for many different kinds of web applications. Django (without any additional libraries) can be used to create REST compliant APIs. Django REST Framework is a popular library you install on top of Django that makes creating APIs that comply with RESTful rules much easier.
 
 
-<img src="/images/djangoFlow.jpg">
+<img src="/images/djangoFlow.jpg" style="width:350px;height:590px;"/>
 
 This drawing shows the general flow of django requests and responses. 
 
