@@ -115,7 +115,6 @@ def fileUpdate(request, pk):
             return redirect(fileList)
 
     else: 
-        print("\n\n\nMade it here boiiiii\n\n\n")
         file = AudioFile.objects.get(id=pk)
         form = AudioFileForm()
         return render(request, 'api/fileUpdate.html', {'form':form, 'file':file})

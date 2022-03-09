@@ -25,10 +25,16 @@ I used function based views
 I used the
 
 ## To Do
-* try to parse api/overview json into something displayable on the frontend 
-* add music player to list page (watch spotify clone and vanilla js audio player videos)
+Add play pause handling to play button js function
 
-* table borders disappeared
+Make play update delete buttons icons instead of text
+
+Figure out how to get external css 
+
+Figure out how to make a boiler plate html and do the {% extends base.html %} thing 
+
+* try to parse api/overview json into something displayable on the frontend 
+
 * unclear on how file data is passed along in POST requests and responses
 
 * figure out where to catch/block improper file formats
