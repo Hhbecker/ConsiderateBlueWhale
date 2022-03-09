@@ -1,6 +1,9 @@
 # ConsiderateBlueWhale
 
-<img src="/images/whale.jpg">
+<img src="/images/whale.jpg" style="width:200px;height:170px;"/>
+
+source: https://www.freepik.com/free-photos-vectors/cartoon-whale
+
 
 This project marks my introduction to python backend development in general and to the Django framework specifically. My original goal was to create a RESTful api for storing music files but I decided to add a simple frontend and integrate that into the backend instead of creating a separate API and frontend. I learned a lot more about web development during this project which makes it a smashing success. 
 
@@ -40,25 +43,16 @@ I used function based views
 I used the
 
 ## To Do
-The issue is the url paths for media files, understand media root and url and how to get to them  
+1. Polish ReadMe 
+* add important notes from django, djangoProject, and webDev notes in Notes repo
+* get Lucid chart diagram 
+2. Figure out how file data is trasnferred around 
+3. test it and write down weaknesses and flaws 
+6. comment all code 
 
-Add play pause handling to play button js function
+* understand lower level of how your computer actually communicatess with GET and POST etc
 
-Make play update delete buttons icons instead of text
 
 * try to parse api/overview json into something displayable on the frontend 
-
-* unclear on how file data is passed along in POST requests and responses
-
 * figure out where to catch/block improper file formats
-
 * write tests
-
-* comment everythinhg
-* readme explanation with lucid chart design diagrams
-
-
-### Resources
-* How to write an API in 3 lines of code https://medium.com/crowdbotics/how-to-write-an-api-in-3-lines-of-code-with-django-rest-framework-59b0971edfa4
-
-* Views on views matt layman https://www.mattlayman.com/understand-django/views-on-views/
