@@ -13,7 +13,7 @@ urlpatterns = [
     # base URL is 'api/' 
 
     # call the apiOverview view when the base url is requested ('api/')
-    path('', views.apiOverview, name="overview"),
+    path('overview/', views.apiOverview, name="overview"),
     # call the fileList view when the 'api/audiofiles-list/' url is requested
     path('list/', views.fileList, name="list"),
     # call the fileDetail view when the 'api/audiofiles-detail/<str:pk>/' url is requested

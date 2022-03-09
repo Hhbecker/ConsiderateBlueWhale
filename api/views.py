@@ -50,17 +50,6 @@ def apiOverview(request):
     # return the api_urls list object packaged in JSON format by the JsonResponse function
     return JsonResponse(api_urls)
 
-# view fileList: lists all fields of each AudioFile instance - only responds to GET requests
-@api_view(['GET'])
-def fileList(request):
-    # define the file variable which contains all instances of the AudioFile class in the database 
-    files = AudioFile.objects.all()
-    # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
-    serializer = AudioFileSerializer(files, many = True)
-    # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
-    # I would ideally use the serialized version of the AudioFile objects but I can't get it to work.
-    return render(request, 'api/fileList.html', {'files' : files})
-
 # view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
 # input: GET request, id of AudioFile to be retrieved
 @api_view(['GET'])
@@ -71,6 +60,18 @@ def fileDetail(request, pk):
     serializer = AudioFileSerializer(file, many = False)
     # return the AudioFile data as JSON
     return(Response(serializer.data))
+
+
+# view fileList: lists all fields of each AudioFile instance - only responds to GET requests
+@api_view(['GET'])
+def fileList(request):
+    # define the file variable which contains all instances of the AudioFile class in the database 
+    files = AudioFile.objects.all()
+    # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
+    serializer = AudioFileSerializer(files, many = True)
+    # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
+    # I would ideally use the serialized version of the AudioFile objects but I can't get it to work.
+    return render(request, 'api/fileList.html', {'files' : files})
 
 # view fileCreate: add an AudioFile instance to the database
 @api_view(['GET','POST'])
