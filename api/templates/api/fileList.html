@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>        
+{% extends 'base.html' %}
 
-        <!-- first load django static tag. -->
-        {% load static %}
+{% block content %}
 
-        <!-- Not Working <link rel="stylesheet" src="{% static 'api/style.css' %}"> -->
-
-        <style>
-            body {background-color: powderblue;
-                  text-align:center;}
-            h1   {color: blue;}
-            p    {color: red;}
-            .center {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            table, th, td {
-                border: 1px solid;
-            }
-        </style>
-
-        <script src="{% static 'api/functions.js' %}"></script>
-    </head>
-
-
-    <body>
-    
-        <h1>  Audio File List   </h1>
+<h1>  Audio File List   </h1>
 
         <table class="center">
             <thead> 
@@ -35,6 +10,7 @@
                     <th>Title</th>
                     <th>Title</th>
                     <th>Bpm</th>
+                    <th>DB ID</th>
                     <th>Play</th>
                     <th>Update</th>
                     <th>Delete</th>
@@ -46,7 +22,8 @@
                         <td> {{ file.title }}</td>
                         <td> {{ file.artist }}</td>
                         <td> {{ file.bpm }}</td>
-                        <td><button onclick="playSong('{{ file.file.url }}')">Play</button></td>
+                        <td> {{ file.id }}</td>
+                        <td><button onclick="playSong('{{ file.file.name }}')">Play</button></td>
                         <td> 
                             <button onclick="goToUpdateFile('{{ file.id }}')">Update</button>
                             <!--<a href="{% url 'update' file.id %}"><button>Update</button></a>-->
@@ -63,6 +40,4 @@
             <a href="{% url 'create' %}"><button>Upload New File</button></a>
         </p>
 
-    </body>
-
-</html>
+{% endblock %}

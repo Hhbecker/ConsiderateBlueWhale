@@ -1,5 +1,7 @@
 # ConsiderateBlueWhale
 
+<img src="/images/whale.jpg">
+
 This project marks my introduction to python backend development in general and to the Django framework specifically. My original goal was to create a RESTful api for storing music files but I decided to add a simple frontend and integrate that into the backend instead of creating a separate API and frontend. I learned a lot more about web development during this project which makes it a smashing success. 
 
 ### What is Django?
@@ -13,6 +15,19 @@ This drawing shows the general flow of django requests and responses.
 
 The base url is really localhost/api/list
 
+### Project structure
+ConsiderateBlueWhale is the project directory
+api is the app directory
+
+These are the api endpoints:
+* 
+* 
+* 
+
+base.html is extended by the individual html templates that are returned by each django view
+base.html loads the style.css and functions.js files for use in each template
+
+
 #### Storing audio files 
 * as BLOBs (A binary large object - a collection of binary data stored as a single entity)
 * in the filesystem of the server that hosts the API
@@ -25,13 +40,11 @@ I used function based views
 I used the
 
 ## To Do
+The issue is the url paths for media files, understand media root and url and how to get to them  
+
 Add play pause handling to play button js function
 
 Make play update delete buttons icons instead of text
-
-Figure out how to get external css 
-
-Figure out how to make a boiler plate html and do the {% extends base.html %} thing 
 
 * try to parse api/overview json into something displayable on the frontend 
 
