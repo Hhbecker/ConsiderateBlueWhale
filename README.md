@@ -1,4 +1,4 @@
-<h1 style="text-align:center">ConsiderateBlueWhale</h1>
+ConsiderateBlueWhale
 
 <p align="center">
 <img src="/images/whale.jpg" style="width:200px;height:170px;"/>
@@ -7,14 +7,14 @@
 This project marks my introduction to web development with the Django Web Framework. I've created a simple CRUD capable website made up of Django views that interact with the sqlite database to serve html templates. The website allows for upload and streaming of audio files while tracking the audio file bpm (this is a proof of concept for whatever other audio processing task I might want to perform). I've started to separate the front end and the backend to convert the current backend portion into a strict RESTful api with a separate application for the frontend but this separation is still under construction. I learned a lot more about web development during this project which makes it a smashing success. 
 
 ### Project structure
-Project name: "ConsiderateBlueWhale"
+Project name: "ConsiderateBlueWhale"</br>
 App name: "api"
 
 #### Database
 Default django sqlite3
 
 #### Backend
-* model form for 'create' functionality
+* model forms for 'create' and 'update' functionality
 * function based views that render html templates as their return value
 
 #### Front End
@@ -29,7 +29,7 @@ Templates:
 * update file form
 
 
-#### Uploading and storing audio files 
+### Uploading and storing audio files 
 Files were saved on a Model with a FileField, using a ModelForm. When the user submits the form on the frontend, a connection is made between the local outgoing port and the server's incoming port. The file data is packetized, sent through the network, reassembled, and passed into the appropriate django view where it is converted to an instance of the model class. At this point the actual data is stored in RAM and is only written to the disk file system when the `.save()` function is called on the object instance. 
 
 
@@ -54,7 +54,7 @@ It’s sometimes referred to as a contract between an information provider and a
 
 An interface creates a box around part of a program and says "here is what can go in and out of this box". An Application Programming Interface is an interface used in big applications to decouple/abstract/seperate different parts of a codebase while ensuring many different application components communicate safely and correctly. If you need a frontend and a backend it might be best to establish an interface between the frontend and backend so the two parts can be developed independently as long as the rules of the interface are followed. 
 
-<img src="/images/webServer.jpg" style="width:960px;height:590px;"/>
+<img src="/images/webServer.jpg" style="width:480px;height:295px;"/>
 
 This diagram shows the API as a regulated gateway between the frontend and the database.
 
