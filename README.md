@@ -1,58 +1,89 @@
 # ConsiderateBlueWhale
 
 <img src="/images/whale.jpg" style="width:200px;height:170px;"/>
+https://www.freepik.com/free-photos-vectors/cartoon-whale
 
-source: https://www.freepik.com/free-photos-vectors/cartoon-whale
+This project marks my introduction to web development with the Django Web Framework. I've created a simple CRUD capable website made up of Django views that interact with the sqlite database to serve html templates. The website allows for upload and streaming of audio files while tracking the audio file bpm (this is a proof of concept for whatever other audio processing task I might want to perform). I've started to separate the front end and the backend to convert the current backend portion into a strict RESTful api with a separate application for the frontend but this separation is still under construction. I learned a lot more about web development during this project which makes it a smashing success. 
+
+### Project structure
+Project name: "ConsiderateBlueWhale"
+App name: "api"
+
+#### Database
+Default django sqlite3
+
+#### Backend
+* model form for 'create' functionality
+* function based views that render html templates as their return value
+
+#### Front End
+django templates using:
+* base html which is extended in each template
+* some bootstrap css
+* a little javascript
+
+Templates:
+* create file form
+* list of files in database with options to play, update, or delete a given file
+* update file form
 
 
-This project marks my introduction to python backend development in general and to the Django framework specifically. My original goal was to create a RESTful api for storing music files but I decided to add a simple frontend and integrate that into the backend instead of creating a separate API and frontend. I learned a lot more about web development during this project which makes it a smashing success. 
+#### Uploading and storing audio files 
+Files were saved on a Model with a FileField, using a ModelForm. When the user submits the form on the frontend, a connection is made between the local outgoing port and the server's incoming port. The file data is packetized, sent through the network, reassembled, and passed into the appropriate django view where it is converted to an instance of the model class. At this point the actual data is stored in RAM and is only written to the disk file system when the `.save()` function is called on the object instance. 
+
 
 ### What is Django?
 Django is a python based web framework that can be used for many different kinds of web applications. Django (without any additional libraries) can be used to create REST compliant APIs. Django REST Framework is a popular library you install on top of Django that makes creating APIs that comply with RESTful rules much easier.
-
 
 <img src="/images/djangoFlow.jpg" style="width:350px;height:590px;"/>
 
 This drawing shows the general flow of django requests and responses. 
 
+#### Django Rest Framework vs regular Django 
+* normal Django uses HTTP response but Django REST API uses JSON response.
+* models are the same
+* add model serializers 
+* make generic views that are slightly different 
+* no templates b/c its just data
 
-The base url is really localhost/api/list
+### What is an API?
+An API, or application programming interface, is a set of rules that define how applications or devices can connect to and communicate with each other. APIs are the code that governs the access points between a database and a server.
 
-### Project structure
-ConsiderateBlueWhale is the project directory
-api is the app directory
+It’s sometimes referred to as a contract between an information provider and an information user—establishing the content required from the consumer (the call) and the content required by the producer (the response). 
 
-These are the api endpoints:
-* 
-* 
-* 
+An interface creates a box around part of a program and says "here is what can go in and out of this box". An Application Programming Interface is an interface used in big applications to decouple/abstract/seperate different parts of a codebase while ensuring many different application components communicate safely and correctly. If you need a frontend and a backend it might be best to establish an interface between the frontend and backend so the two parts can be developed independently as long as the rules of the interface are followed. 
 
-base.html is extended by the individual html templates that are returned by each django view
-base.html loads the style.css and functions.js files for use in each template
+<img src="/images/webServer.jpg" style="width:960px;height:590px;"/>
 
+This diagram shows the API as a regulated gateway between the frontend and the database.
 
-#### Storing audio files 
-* as BLOBs (A binary large object - a collection of binary data stored as a single entity)
-* in the filesystem of the server that hosts the API
+### What is a CRUD API? 
+A CRUD API is an API that establishes the rules for/allows for create, read, update, and delete communications to occur between the the entities on either side of the API. 
 
-You could store the relevant information like path, name, description, etc... in the database and keep the file itself on the server filesystem.
+CRUD stands for:
+* CREATE - generate new records via INSERT statements.
+* READ - reads the data based on input parameters. Similarly, RETRIEVE procedures grab records based on input parameters.
+* UPDATE - modify records without overwriting them.
+* DELETE - delete where specified.
 
-The audio file is or is not 
+### What is a RESTful API?
+REST is a set of architectural constraints of the representational state transfer architectural style. The principles of RESTful architecture serve to create a stable and reliable application that offers simplicity and end-user satisfaction.
 
-I used function based views 
-I used the
+#### RESTful criteria:
+* A client-server architecture made up of clients, servers, and resources, with requests managed through HTTP.
+* Stateless client-server communication, meaning no client information is stored between get requests and each request is separate and unconnected.
+* A uniform interface between components so that information is transferred in a standard form. This requires that:
+resources requested are identifiable and separate from the representations sent to the client. 
+* Self-descriptive messages returned to the client have enough information to describe how the client should process it.
+* Hypertext/hypermedia is available, meaning that after accessing a resource the client should be able to use hyperlinks to find all other currently available actions they can take.
+* A layered system that organizes each type of server (those responsible for security, load-balancing, etc.) involved in the retrieval of requested information into hierarchies, invisible to the client.
 
+---------------------------------------------------------------------
 ## To Do
-1. Polish ReadMe 
-* add important notes from django, djangoProject, and webDev notes in Notes repo
-* get Lucid chart diagram 
-2. Figure out how file data is trasnferred around 
-3. test it and write down weaknesses and flaws 
-6. comment all code 
+1. finish commenting all code
+2. test all functions and write down all weaknesses and flaws 
 
-* understand lower level of how your computer actually communicatess with GET and POST etc
-
-
+* create a view that allows you to filter records by title or artist
 * try to parse api/overview json into something displayable on the frontend 
 * figure out where to catch/block improper file formats
 * write tests
