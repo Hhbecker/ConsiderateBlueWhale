@@ -1,7 +1,8 @@
 # ConsiderateBlueWhale
 
+<p align="center">
 <img src="/images/whale.jpg" style="width:200px;height:170px;"/>
-https://www.freepik.com/free-photos-vectors/cartoon-whale
+</p>
 
 This project marks my introduction to web development with the Django Web Framework. I've created a simple CRUD capable website made up of Django views that interact with the sqlite database to serve html templates. The website allows for upload and streaming of audio files while tracking the audio file bpm (this is a proof of concept for whatever other audio processing task I might want to perform). I've started to separate the front end and the backend to convert the current backend portion into a strict RESTful api with a separate application for the frontend but this separation is still under construction. I learned a lot more about web development during this project which makes it a smashing success. 
 
