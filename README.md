@@ -1,4 +1,4 @@
-# ConsiderateBlueWhale
+<h1 style="text-align:center">ConsiderateBlueWhale</h1>
 
 <p align="center">
 <img src="/images/whale.jpg" style="width:200px;height:170px;"/>
