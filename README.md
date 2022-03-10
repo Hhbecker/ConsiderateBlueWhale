@@ -54,7 +54,7 @@ It’s sometimes referred to as a contract between an information provider and a
 
 An interface creates a box around part of a program and says "here is what can go in and out of this box". An Application Programming Interface is an interface used in big applications to decouple/abstract/seperate different parts of a codebase while ensuring many different application components communicate safely and correctly. If you need a frontend and a backend it might be best to establish an interface between the frontend and backend so the two parts can be developed independently as long as the rules of the interface are followed. 
 
-<img src="/images/webServer.jpg" style="width:480px;height:295px;"/>
+<img src="/images/webServer.jpeg" style="width:480px;height:295px;"/>
 
 This diagram shows the API as a regulated gateway between the frontend and the database.
 
