@@ -88,3 +88,13 @@ resources requested are identifiable and separate from the representations sent 
 * try to parse api/overview json into something displayable on the frontend 
 * figure out where to catch/block improper file formats
 * write tests
+
+
+----------
+Briefly go through and comment code 
+
+try returning json to detail view 
+
+make a new app called frontend and try to pass detail view to frontend 
+
+regroup

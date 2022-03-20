@@ -1,3 +1,5 @@
+# Contains form to turn model fields into prompts displayable in html
+
 from django.forms import ModelForm
 
 from .models import AudioFile
@@ -6,12 +8,11 @@ from .models import AudioFile
 # for example: the AudioFile model has a title field with max length of 200 characters so the 
 # form creates a text input box with a max length of 200 characters
 
-# What kind of model is this? there are two kinds in the django docs 
-
+# What is the significance of passing in ModelForm?
 
 class AudioFileForm(ModelForm):
     # what is class Meta?
     class Meta:
         model = AudioFile
-        # change __all__ to all expect bpm b/c this is calculated within view
+        # include all fields except bpm in the form
         fields = ['title', 'artist', 'file']

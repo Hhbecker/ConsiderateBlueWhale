@@ -1,0 +1,30 @@
+  <!-- first load django static tag. -->
+  {% load static %}
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <link rel="stylesheet" href="{% static '/api/style.css' %}">
+      <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  
+      <script src="{% static '/api/functions.js' %}" type="text/javascript"></script> 
+  
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Considerate Blue Whale</title>
+    </head>
+    <body>
+  
+      <h1> Considerate Blue Whale </h1>
+  
+      <img src="{% static '/api/images/whale.jpg' %}" style="width:200px;height:170px;"/>
+  
+      {% block content %}
+  
+      {% endblock %}
+  
+      <p>Author: Henry Becker © 2022</p>
+  
+    </body>
+  </html>

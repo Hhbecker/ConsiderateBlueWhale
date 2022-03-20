@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+        <h2>  API ENDPOINTS   </h2>
+        <p id="list"></p>
+
+        <p id="detail"></p>
+
+        <p id="create"></p>
+
+        <p id="update"></p>
+
+        <p id="delete"></p>
+
+
+
+        <script>
+            fetch('/api')
+                .then(response => response.json()) 
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('list').innerText = data.List;
+                    document.getElementById('detail').innerText = data.Detail;
+                    document.getElementById('create').innerText = data.Create;
+                    document.getElementById('update').innerText = data.Update;
+                    document.getElementById('delete').innerText = data.Delete;
+                })
+        </script>
+
+{% endblock %}

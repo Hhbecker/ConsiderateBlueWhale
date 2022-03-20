@@ -1,3 +1,5 @@
+# Tbh im confused about serializers (it works without them idk what they do)
+
 # When a user submits information (such as creating a new instance) through 
 # the API, the serializer takes the data, validates it, and converts it into 
 # something Django can slot into a Model instance. Similarly, when a user 

@@ -1,3 +1,5 @@
+# Implements the functions called when the urls designated in urls.py are requested  
+
 # A given serializer will parse information in both directions 
 # (reads and writes), but the ViewSet is where the available 
 # operations are defined. 
@@ -40,38 +42,38 @@ def apiOverview(request):
 
     # define the api_urls list object
     api_urls = {
-        'List':'/audiofiles-list/',
-        'DetailView':'fileDetail/<str:pk>/',
-        'Create':'auidofile-create/',
-        'Update':'audiofile-update/<str:pk>/',
-        'Delete':'audiofile-delete/<str:pk>/'
+        'List':'/list/',
+        'Detail':'/detail/<str:pk>/',
+        'Create':'/create/',
+        'Update':'/update/<str:pk>/',
+        'Delete':'/delete/<str:pk>/'
     }
 
     # return the api_urls list object packaged in JSON format by the JsonResponse function
     return JsonResponse(api_urls)
-
-# view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
-# input: GET request, id of AudioFile to be retrieved
-@api_view(['GET'])
-def fileDetail(request, pk):
-    # save the AudioFile instance with the id = pk into the files variable 
-    file = AudioFile.objects.get(id=pk)
-    # serialize the AudioFile data to JSON
-    serializer = AudioFileSerializer(file, many = False)
-    # return the AudioFile data as JSON
-    return(Response(serializer.data))
 
 
 # view fileList: lists all fields of each AudioFile instance - only responds to GET requests
 @api_view(['GET'])
 def fileList(request):
     # define the file variable which contains all instances of the AudioFile class in the database 
-    files = AudioFile.objects.all()
+    files = AudioFile.objects.all() 
     # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
     serializer = AudioFileSerializer(files, many = True)
     # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
     # I would ideally use the serialized version of the AudioFile objects but I can't get it to work.
     return render(request, 'api/fileList.html', {'files' : files})
+
+    # view fileList: lists all fields of each AudioFile instance - only responds to GET requests
+@api_view(['GET'])
+def frontendList(request):
+    # define the file variable which contains all instances of the AudioFile class in the database 
+    files = AudioFile.objects.all()
+    # serialize all of the AudioFile instances into JSON using the AudioFileSerializer function imported from serializers.py
+    serializer = AudioFileSerializer(files, many = True)
+    # render function: takes in path to html file and saves the files variable into a variable that can be manipulated in the html
+    # I would ideally use the serialized version of the AudioFile objects but I can't get it to work.
+    return JsonResponse(serializer.data, safe=False)
 
 # view fileCreate: add an AudioFile instance to the database
 @api_view(['GET','POST'])
@@ -134,3 +136,17 @@ def fileDelete(request, pk):
     # I would ideally use the serialized AudioFile objects but I can't get it to work
     return render(request, 'api/fileList.html', {'files' : files})
 
+
+
+
+
+# view fileDetail: returns all fields of a specific AudioFile instance - only responds to GET requests  
+# input: GET request, id of AudioFile to be retrieved
+@api_view(['GET'])
+def fileDetail(request, pk):
+    # save the AudioFile instance with the id = pk into the files variable 
+    file = AudioFile.objects.get(id=pk)
+    # serialize the AudioFile data to JSON
+    serializer = AudioFileSerializer(file, many = False)
+    # return the AudioFile data as JSON
+    return(Response(serializer.data))

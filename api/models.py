@@ -1,10 +1,10 @@
+# Contains audio file model 
+
 from asyncio import FastChildWatcher
 from django.db import models
 from django.forms import IntegerField
 import librosa as lib
 import pathlib
-
-# Create your models here.
 
 # model AudioFile: contains fields for a title (char) and bpm (int)
 class AudioFile(models.Model):
@@ -18,6 +18,10 @@ class AudioFile(models.Model):
     def __str__(self):
         return self.title
 
+    # this property calculates the bpm each time the model instance is requested 
+    # from the server. This would be useful if the bpm changed in between POST 
+    # requests but it doesn't so this approach just slows things down
+    # (not in use)
     @property
     def getBpm(self):
         print("\n\n\n Filename:" + self.file.name + " \n\n\n")
