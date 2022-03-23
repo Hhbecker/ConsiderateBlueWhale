@@ -81,11 +81,23 @@ resources requested are identifiable and separate from the representations sent 
 
 ---------------------------------------------------------------------
 ## To Do
-1. finish commenting all code
+
+https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
+
+steps to make create function on the frontend separate from the backend 
+1. call model and form info from api app to frontend app
+2. copy logic of fileCreate view from api app to frontend app
+3. copy html from fileCreate.html from api app to frontend app
+
+* add edit and delete button actions
+* add file update and file upload html pages 
+* api overview should get a json response form the api 
+
+* add tailwind css to style everything
+1. comment new javascript
 2. test all functions and write down all weaknesses and flaws 
 
 * create a view that allows you to filter records by title or artist
-* try to parse api/overview json into something displayable on the frontend 
 * figure out where to catch/block improper file formats
 * write tests
 

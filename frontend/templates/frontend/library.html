@@ -6,18 +6,71 @@
 
 <h2>  Library   </h2>
 
-<script>
-    fetch('/api/listJson', {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
+        <table>
+            <thead> 
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Bpm</th>
+                    <th>Play</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                   
+            </tbody>
+        </table>
 
-    })
-        .then(response => response.json()
-        .then(data => {
-            console.log('json', data);
-        }));
+        <p>
+            <a href="{% url 'upload' %}"><button>Upload Song</button></a>
+        </p>
+
+
+<script>
+
+    function buildTable(data){
+      var table = document.getElementById("myTable");
+
+      for (var i=0; i<data.length; i++){
+        var row = `<tr>
+                    <td>${data[i].title} </td>
+                    <td>${data[i].artist} </td>
+                    <td>${data[i].bpm} </td>
+                    <td> <audio controls src=${data[i].file}>Audio Elem</audio> </td>
+                    <td> <button><img src="{% static '/frontend/images/pencil.png' %}" style="width:35px;height:35px;"/></button></td>
+                    <td> <a href=""><button><img src="{% static '/frontend/images/x.png' %}" style="width:35px;height:35px;"/></button></a></td>
+                    </tr>`
+        table.innerHTML += row;
+      }
+    }
+
+    var data;
+
+    const api_url = '/api/listJson';
+
+    async function getLibrary(){
+
+      const response = await fetch(api_url, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+
+      const data = await response.json();
+      console.log(data[0]);
+      buildTable(data);
+    }
+
+    getLibrary();
+
+
+
 </script>
+
+
+
+
 
 {% endblock %}

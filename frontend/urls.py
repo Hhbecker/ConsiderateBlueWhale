@@ -10,11 +10,12 @@ urlpatterns = [
     # 2. The view function you would like to be called when that url (base+addition) is requested
     # 3. The name of the ______________________ html page that should be called?
 
-    # base URL is 'api/' 
+    # base URL is '' 
 
     # call the apiOverview view
     path('', views.apiOverview, name="overview"),
     path('library', views.library, name="library"),
-
+    path('upload', views.upload, name="upload"),
+    path('update', views.update, name="update"),
 
 ]
