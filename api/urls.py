@@ -21,6 +21,7 @@ urlpatterns = [
     path('detail/<str:pk>/', views.fileDetail, name="detail"),
     # call the fileCreate view when the 'api/create/' url is requested
     path('create/', views.fileCreate, name="create"),
+    path('fileUpload/', views.fileUpload, name="fileUpload"),
     #
     path('list/update/<str:pk>/', views.fileUpdate, name="update"),
     #

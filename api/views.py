@@ -93,6 +93,21 @@ def fileCreate(request):
         form = AudioFileForm()
     return render(request, 'api/fileCreate.html', {'form':form})
 
+# view fileCreate: add an AudioFile instance to the database
+@api_view(['POST'])
+def fileUpload(request):
+
+        # deserialize?
+        if request.is_valid:
+            print("\n\n\n\n made it to api fileUpload view boiiii\n\n\n")
+            instance = request.save()
+            bpm = getBpm(instance.file.name) 
+
+            instance.bpm = bpm
+
+            instance.save()
+            #return http code for success or failure
+
 @api_view(['GET','POST'])
 # define function based view named fileUpdate which takes in an (http?) 
 # request and a primary key identifer and returns a json response
