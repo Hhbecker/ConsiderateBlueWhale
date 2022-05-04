@@ -84,10 +84,8 @@ resources requested are identifiable and separate from the representations sent 
 
 https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
 
-steps to make create function on the frontend separate from the backend 
-1. call model and form info from api app to frontend app
-2. copy logic of fileCreate view from api app to frontend app
-3. copy html from fileCreate.html from api app to frontend app
+What is the best way to get form data from frontend app to api?
+
 
 * add edit and delete button actions
 * add file update and file upload html pages 

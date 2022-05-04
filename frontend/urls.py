@@ -15,7 +15,5 @@ urlpatterns = [
     # call the apiOverview view
     path('', views.apiOverview, name="overview"),
     path('library', views.library, name="library"),
-    path('upload', views.upload, name="upload"),
-    path('update', views.update, name="update"),
 
 ]
